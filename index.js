@@ -39,7 +39,7 @@ app.use(cors());
 
 // Tela inicial
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/main.html'));
+    res.sendFile(path.join(__dirname, '/main0.html'));
 });
 
 // Lista todas as medidas
@@ -85,9 +85,9 @@ app.post('/medidas', async (req, res) => {
                 message: "Medida criada com sucesso.",
                 data: medida
             });
-            res.status(400).json({ message: "Já existe uma medida com essa data." });
+            res.status(400).json({ message: "Já existe uma medida com essa data.", result: true });
         } else {
-            res.status(404).json({ message: "Medida não criada." });
+            res.status(404).json({ message: "Medida não criada.", result: false });
         }
     } catch (error) {
         console.log(`Houve um erro ao realizar a ação.\n${error.message}`);
