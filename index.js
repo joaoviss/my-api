@@ -22,6 +22,7 @@ const Medidas = sequelize.define('medida', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
+
     },
     sis: { type: DataTypes.INTEGER, allowNull: false },
     dia: { type: DataTypes.INTEGER, allowNull: false },
@@ -30,7 +31,6 @@ const Medidas = sequelize.define('medida', {
 
 // Sincroniza com o Banco de dados
 sequelize.sync();
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -39,7 +39,7 @@ app.use(cors());
 
 // Tela inicial
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/main0.html'));
+    res.sendFile(path.join(__dirname, '/main.html'));
 });
 
 // Lista todas as medidas
@@ -83,9 +83,9 @@ app.post('/medidas', async (req, res) => {
         if (medida) {
             res.status(201).json({
                 message: "Medida criada com sucesso.",
-                data: medida
+                data: medida,
+                result: true
             });
-            res.status(400).json({ message: "Já existe uma medida com essa data.", result: true });
         } else {
             res.status(404).json({ message: "Medida não criada.", result: false });
         }
